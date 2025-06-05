@@ -32,9 +32,19 @@ const Document = async ({ params }: PageProps) => {
     title: String(room.metadata.title)
   };
 
-  // Determine user type based on room metadata and access
+  // Determine user type based on room metadata and access rights
   const isCreator = roomMetadata.creatorId === clerkUser.id;
-  const currentUserType: UserType = isCreator ? "creator" : "editor";
+  const userAccess = room.usersAccesses[userEmail] as AccessType | undefined;
+  const hasWriteAccess = userAccess?.[0] === "room:write";
+  
+  let currentUserType: UserType;
+  if (isCreator) {
+    currentUserType = "creator";
+  } else if (hasWriteAccess) {
+    currentUserType = "editor";
+  } else {
+    currentUserType = "viewer";
+  }
   
   return (
     <main className="flex w-full flex-col items-center">

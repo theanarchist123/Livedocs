@@ -19,7 +19,12 @@ function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>;
 }
 
-const Editor = () => {
+interface EditorProps {
+  roomId: string;
+  currentUserType: UserType;
+}
+
+const Editor = ({ roomId, currentUserType }: EditorProps) => {
   const initialConfig = {
     namespace: 'Editor',
     nodes: [HeadingNode],
