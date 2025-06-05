@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-export default {
+const Theme = {
   code: 'editor-code',
   heading: {
     h1: 'editor-heading-h1',
@@ -40,4 +40,6 @@ export default {
     underline: 'editor-text-underline',
     underlineStrikethrough: 'editor-text-underlineStrikethrough',
   },
-};
+} as const;
+
+export default Theme;

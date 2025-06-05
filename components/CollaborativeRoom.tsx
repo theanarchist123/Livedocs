@@ -1,34 +1,67 @@
 'use client'
-import { SignInButton } from '@clerk/nextjs'
-import { SignedOut } from '@clerk/nextjs'
-import { UserButton } from '@clerk/nextjs'
+import { SignInButton, SignedOut, SignedIn, UserButton } from '@clerk/nextjs'
 import { ClientSideSuspense, RoomProvider } from '@liveblocks/react'
 import React from 'react'
 import Editor from './editor/Editor'
 import Header from './Header'
-import { SignedIn } from '@clerk/nextjs'
+import ActiveCollaborators from './ActiveCollaborators'
 
-const CollaborativeRoom = () => {
-  return (
-    <RoomProvider id="my-room">
-    <ClientSideSuspense fallback={<div>Loading…</div>}>
-      <div className="collaborative-room">
-      <Header>
-        <div className="flex w-fit items-center justify-center gap-2">
-          <p className="document-title">Share</p>
-        </div>
-      <SignedOut>
-        <SignInButton/>
-      </SignedOut>
-      <SignedIn>
-        <UserButton/>
-      </SignedIn>
-      </Header>
-      <Editor />
-      </div>
-    </ClientSideSuspense>
-  </RoomProvider>
-  )
+interface CollaborativeRoomProps {
+  roomId: string;
+  roomMetadata: {
+    title: string;
+  };
+  users: Array<{
+    id: string;
+    name: string;
+    avatar: string;
+    color: string;
+  }>;
+  currentUserType: 'viewer' | 'editor';
 }
 
-export default CollaborativeRoom
+const Room = ({
+  roomId,
+  roomMetadata,
+  users,
+  currentUserType
+}: CollaborativeRoomProps) => {
+  return (
+    <div className="collaborative-room">
+      <Header>
+        <div className="flex w-fit items-center justify-center gap-2">
+          <p className="document-title">{roomMetadata.title}</p>
+        </div>
+        <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
+          <ActiveCollaborators />
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+        </div>
+      </Header>
+      <Editor />
+    </div>
+  );
+};
+
+const CollaborativeRoom = (props: CollaborativeRoomProps) => {
+  return (
+    <RoomProvider
+      id={props.roomId}
+      initialPresence={{
+        cursor: null,
+        selection: null,
+        isTyping: false,
+      }}
+    >
+      <ClientSideSuspense fallback={<div>Loading…</div>}>
+        {() => <Room {...props} />}
+      </ClientSideSuspense>
+    </RoomProvider>
+  );
+};
+
+export default CollaborativeRoom;
