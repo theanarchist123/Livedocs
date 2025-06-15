@@ -9,7 +9,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-
 import { useSelf } from '@liveblocks/react/suspense';
 import React, { useState } from 'react'
 import { Button } from "@/components/ui/button";
@@ -22,23 +21,19 @@ import { updateDocumentAccess } from "@/lib/actions/room.actions";
 
 const ShareModal = ({ roomId, collaborators, creatorId, currentUserType }: ShareDocumentDialogProps) => {
   const user = useSelf();
-
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const [email, setEmail] = useState('');
   const [userType, setUserType] = useState<UserType>('viewer');
 
   const shareDocumentHandler = async () => {
     setLoading(true);
-
     await updateDocumentAccess({ 
       roomId, 
       email, 
       userType: userType as UserType, 
       updatedBy: user.info,
     });
-
     setLoading(false);
   }
 
@@ -49,8 +44,17 @@ const ShareModal = ({ roomId, collaborators, creatorId, currentUserType }: Share
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
-        <Button className="gradient-blue flex h-9 gap-1 px-4">
+      <DialogTrigger asChild>
+        <div 
+          role="button"
+          tabIndex={0}
+          className="gradient-blue flex h-9 cursor-pointer items-center gap-1 rounded-md px-4 text-white transition-all hover:opacity-80"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              setOpen(true);
+            }
+          }}
+        >
           <Image
             src="/assets/icons/share.svg"
             alt="share"
@@ -58,10 +62,10 @@ const ShareModal = ({ roomId, collaborators, creatorId, currentUserType }: Share
             height={20}
             className="min-w-4 md:size-5"
           />
-          <p className="mr-1 hidden sm:block">
+          <span className="mr-1 hidden sm:block">
             Share
-          </p>
-        </Button>
+          </span>
+        </div>
       </DialogTrigger>
       <DialogContent className="shad-dialog">
         <DialogHeader>
@@ -86,7 +90,12 @@ const ShareModal = ({ roomId, collaborators, creatorId, currentUserType }: Share
               setUserType={setUserType}
             />
           </div>
-          <Button type="submit" onClick={shareDocumentHandler} className="gradient-blue flex h-full gap-1 px-5" disabled={loading}>
+          <Button 
+            type="submit" 
+            onClick={shareDocumentHandler} 
+            className="gradient-blue flex h-full gap-1 px-5" 
+            disabled={loading}
+          >
             {loading ? 'Sending...' : 'Invite'}
           </Button>
         </div>
@@ -107,7 +116,7 @@ const ShareModal = ({ roomId, collaborators, creatorId, currentUserType }: Share
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 
-export default ShareModal
+export default ShareModal;

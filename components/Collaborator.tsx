@@ -34,7 +34,7 @@ const Collaborator = ({ roomId, creatorId, collaborator, email, user }: Collabor
       <div className="flex gap-2">
         <Image 
           src={collaborator.avatar}
-          alt={collaborator.name}
+          alt={collaborator.name || 'User avatar'}
           width={36}
           height={36}
           className="size-9 rounded-full"

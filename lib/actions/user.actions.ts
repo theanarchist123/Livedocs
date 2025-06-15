@@ -1,9 +1,8 @@
 'use server';
 
-import { clerkClient } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
 import { parseStringify } from "../utils";
 import liveblocks from "../liveblocks";
-import { User } from "@clerk/nextjs/server";
 
 interface UserInfo {
   id: string;
@@ -12,28 +11,26 @@ interface UserInfo {
   avatar: string;
 }
 
-export const getClerkUsers = async ({ userIds }: { userIds: string[]}) => {
+export const getClerkUsers = async ({ userIds }: { userIds: string[] }) => {
   try {
-    const users = await clerkClient.users.getUserList({
-      emailAddress: userIds,
-    });
-
-    if (!users || users.length === 0) {
-      return parseStringify([]);
+    // Ensure we're authenticated
+    const user = await currentUser();
+    if (!user) {
+      throw new Error('Not authenticated');
     }
 
-    const usersData = users.map((user: User) => ({
-      id: user.id,
-      name: `${user.firstName} ${user.lastName}`,
-      email: user.emailAddresses[0].emailAddress,
-      avatar: user.imageUrl,
+    // For now, we'll use the email addresses as placeholders
+    // This is a temporary solution until we can properly fetch users by email
+    const usersData = userIds.map((email) => ({
+      id: email,
+      name: email.split('@')[0] || 'Unknown User',
+      email: email,
+      avatar: `https://api.dicebear.com/7.x/initials/svg?seed=${email}`,
     }));
 
-    const sortedUsers = userIds.map((email) => usersData.find((user: UserInfo) => user.email === email));
-
-    return parseStringify(sortedUsers);
+    return parseStringify(usersData);
   } catch (error) {
-    console.log(`Error fetching users: ${error}`);
+    console.error(`Error fetching users:`, error);
     return parseStringify([]);
   }
 }

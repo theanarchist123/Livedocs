@@ -67,7 +67,7 @@ const Notifications = () => {
                         src={props.inboxNotification.activities[0].data.avatar as string || ''}
                         width={36}
                         height={36}
-                        alt="avatar"
+                        alt={String(props.inboxNotification.activities[0].data.title) || 'avatar'}
                         className="rounded-full"
                       />
                     </InboxNotification.Icon>}>

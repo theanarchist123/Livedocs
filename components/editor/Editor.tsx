@@ -10,6 +10,7 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import React from 'react';
+import { ThreadData } from '@liveblocks/client';
 
 import { FloatingComposer, FloatingThreads, liveblocksConfig, LiveblocksPlugin, useEditorStatus } from '@liveblocks/react-lexical'
 import Loader from '../Loader';
@@ -18,10 +19,6 @@ import FloatingToolbarPlugin from './plugins/FloatingToolbarPlugin'
 import { useThreads } from '@liveblocks/react/suspense';
 import Comments from '../Comments';
 import { DeleteModal } from '../DeleteModal';
-
-// Catch any errors that occur during Lexical updates and log them
-// or throw them as needed. If you don't throw them, Lexical will
-// try to recover gracefully without losing user data.
 
 function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>;
@@ -40,6 +37,8 @@ const Editor = ({ roomId, currentUserType }: { roomId: string, currentUserType: 
     },
     theme: Theme,
     editable: currentUserType === 'editor',
+    // User metadata is handled by LiveblocksProvider in the root layout
+    // and comes from the liveblocks-auth endpoint
   });
 
   return (
@@ -67,8 +66,11 @@ const Editor = ({ roomId, currentUserType }: { roomId: string, currentUserType: 
           )}
 
           <LiveblocksPlugin>
-            <FloatingComposer className="w-[350px]" />
-            <FloatingThreads threads={threads} />
+            <FloatingComposer className="w-[350px] comment-composer" />
+            <FloatingThreads 
+              threads={threads} 
+              className="thread-list"
+            />
             <Comments />
           </LiveblocksPlugin>
         </div>
