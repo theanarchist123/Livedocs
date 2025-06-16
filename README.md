@@ -1,36 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LiveDocs - Real-time Collaborative Document Editor 🚀
 
-## Getting Started
+Welcome to LiveDocs, a cutting-edge collaborative document editing platform that brings together the power of real-time collaboration and modern web technologies. Inspired by platforms like Google Docs and Notion, LiveDocs takes document collaboration to the next level by offering a seamless, intuitive, and feature-rich environment where teams can create, edit, and share documents in real-time. Whether you're brainstorming with colleagues, writing documentation with your team, or working on a shared project, LiveDocs makes collaboration effortless and enjoyable.
 
-First, run the development server:
+![LiveDocs Preview](public/assets/images/doc.png)
 
+## ✨ Features
+
+### Real-time Collaboration
+- 🤝 Multiple users can edit documents simultaneously
+- 👥 See who's currently viewing or editing the document
+- 💬 Real-time comments and discussions within documents
+- 🎨 User cursors with unique colors for each collaborator
+
+### Rich Text Editing
+- 📝 Support for headings, bold, italic, and other text formatting
+- ⚡ Fast and responsive editor powered by Lexical
+- 🎯 Floating toolbar for quick formatting
+- 📏 Multiple text alignment options
+
+### User Management
+- 🔐 Secure authentication with Clerk
+- 👤 User profiles with avatars
+- 📧 Invite collaborators via email
+- 🎚️ Granular access controls (Viewer/Editor roles)
+
+### Modern UI/UX
+- 🌓 Dark mode optimized interface
+- 💫 Smooth animations and transitions
+- 📱 Responsive design for all devices
+- 🎯 Intuitive and clean user interface
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type-safe code
+- **Tailwind CSS** - Styling and UI components
+- **Lexical** - Rich text editor framework
+- **Liveblocks** - Real-time collaboration
+- **Radix UI** - Accessible component primitives
+- **Clerk** - Authentication and user management
+
+### Backend
+- **Next.js API Routes** - Backend API
+- **Liveblocks Storage** - Document storage and sync
+- **Clerk Backend SDK** - User management
+
+### Development Tools
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **PostCSS** - CSS processing
+- **Git** - Version control
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ installed
+- npm or yarn package manager
+- Git
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/live_docs.git
+cd live_docs
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
+
+Fill in the following environment variables:
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+LIVEBLOCKS_SECRET_KEY=your_liveblocks_secret_key
+```
+
+4. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔜 Future Scope
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Enhanced Collaboration
+- 📊 Real-time charts and diagrams
+- 📎 File attachments and media embedding
+- 🎥 Video conferencing integration
+- 📱 Mobile apps for iOS and Android
 
-## Learn More
+### Advanced Features
+- 📑 Document templates
+- 📈 Version history and rollback
+- 🔍 Advanced search capabilities
+- 🔄 Offline support with sync
+- 📤 Export to multiple formats
 
-To learn more about Next.js, take a look at the following resources:
+### AI Integration
+- 💡 AI-powered writing suggestions
+- 🎯 Smart formatting recommendations
+- 🔍 Content analysis and insights
+- 🗣️ Voice-to-text input
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Enterprise Features
+- 👥 Team workspaces
+- 📊 Analytics dashboard
+- 🔐 Advanced security features
+- 🤝 Third-party integrations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🤝 Contributing
 
-## Deploy on Vercel
+We welcome contributions to LiveDocs! Please feel free to submit issues and pull requests.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📝 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
+
+## 🙏 Acknowledgments
+
+- [Liveblocks](https://liveblocks.io) for real-time collaboration
+- [Lexical](https://lexical.dev) for the powerful editor framework
+- [Clerk](https://clerk.dev) for authentication
+- All our contributors and supporters
+
+---
+
+Built with ❤️ using Next.js, Lexical, and Liveblocks
