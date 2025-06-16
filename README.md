@@ -2,14 +2,9 @@
 
 Welcome to LiveDocs, a cutting-edge collaborative document editing platform that brings together the power of real-time collaboration and modern web technologies. Inspired by platforms like Google Docs and Notion, LiveDocs takes document collaboration to the next level by offering a seamless, intuitive, and feature-rich environment where teams can create, edit, and share documents in real-time. Whether you're brainstorming with colleagues, writing documentation with your team, or working on a shared project, LiveDocs makes collaboration effortless and enjoyable.
 
-<<<<<<< HEAD
-![LiveDocs Preview](public/assets/images/doc.png)
-=======
 ![LiveDocs Preview](public/assets/icons/logo.svg)
->>>>>>> da3a2b39c34e3c09631bd974b465866f339e2c59
 
 ## ✨ Features
-
 ### Real-time Collaboration
 - 🤝 Multiple users can edit documents simultaneously
 - 👥 See who's currently viewing or editing the document
