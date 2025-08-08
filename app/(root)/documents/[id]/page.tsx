@@ -34,14 +34,14 @@ interface CollaboratorUser extends User {
 }
 
 interface SearchParamProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 const Document = async ({ params }: SearchParamProps) => {
   try {
-    const id = params.id;
+    const { id } = await params;
     const clerkUser = await currentUser();
     if(!clerkUser) redirect('/sign-in');
 
